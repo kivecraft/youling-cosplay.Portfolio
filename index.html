@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>幽靈小攝影｜Cosplay 作品集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- 網站樣式 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== 導覽列 ===== -->
+  <nav class="navbar">
+    <a href="#" class="logo">
+      <!-- 想換成圖片 Logo：把 src="" 改成圖片路徑，例如 src="images/logo.png"
+           若只想顯示圖片、不顯示文字，可刪掉下面那行 <span>。 -->
+      <img src="" alt="幽靈小攝影 Logo">
+      <span class="logo-text">幽靈小攝影<small>Ghost Photography</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#gallery">作品</a>
+      <a href="#about">關於</a>
+    </div>
+  </nav>
+
+  <!-- ===== 頁首標語 ===== -->
+  <header class="hero">
+    <div class="eyebrow">Cosplay</div>
+    <h1>Portfolio</h1>
+    <div class="divider"></div>
+    <p>拍照是一件美好的事物</p>
+  </header>
+
+  <!-- ===== 相片牆（照片由下方 JavaScript 自動產生，這裡不用手動加） ===== -->
+  <main id="gallery" class="gallery"></main>
+
+  <!-- 作品區與關於我之間的細分隔線 -->
+  <hr class="section-divider">
+
+  <!-- =====================================================================
+       👤 關於我（自我介紹）：直接修改下面的文字就好
+       - 大頭照：把 src="" 改成照片路徑，例如 src="images/me.jpg"
+       - 自我介紹：每一段文字用一組 <p> ... </p> 包起來，
+                   想多一段就複製一行 <p>...</p> 貼在下面
+       - IG 連結：把 href 裡的「你的帳號」換成自己的 IG 帳號；
+                  不需要的話，把整行 <a class="about-link"...>...</a> 刪掉即可
+       ===================================================================== -->
+  <section id="about" class="about">
+    <div class="about-card">
+      <div class="about-avatar">
+        <img src="images/you01.jpg" alt="幽靈小攝影大頭照">
+      </div>
+      <div class="about-body">
+        <div class="about-eyebrow">About</div>
+        <h2>關於我</h2>
+
+        <p>（大家好～ 我是幽靈  玩了三年Cos/10個月的攝影,喜歡拍照拍照,目前還是個香雞初學者,請多多包涵～</p>
+        <p>常出沒在高雄,台南 中部偶爾 </p>
+
+        <div class="about-links">
+          <a class="about-link" href="https://www.instagram.com/you_ling1007/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> 幽靈小攝影 · 照片版權歸攝影師與 Coser 所有，請勿未經同意轉載
+  </footer>
+
+  <!-- ===== 燈箱 ===== -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="關閉">&times;</button>
+    <button class="lb-btn lb-prev"  id="lbPrev"  aria-label="上一則作品">&#8249;</button>
+    <!-- 照片區：同一則作品有多張時，可在這裡左右切換（像 IG） -->
+    <div class="lb-stage" id="lbStage">
+      <img class="lightbox-img" id="lbImg" src="" alt="">
+      <button class="lb-slide lb-slide-prev" id="lbSlidePrev" aria-label="這則的上一張">&#8249;</button>
+      <button class="lb-slide lb-slide-next" id="lbSlideNext" aria-label="這則的下一張">&#8250;</button>
+    </div>
+    <div class="lb-dots" id="lbDots"></div>
+    <div class="lightbox-caption">
+      <div id="lbTitle"></div>
+      <div><a class="lb-coser" id="lbCoser" target="_blank" rel="noopener noreferrer"></a></div>
+      <div class="by" id="lbBy"></div>
+      <div class="count" id="lbCount"></div>
+    </div>
+    <button class="lb-btn lb-next"  id="lbNext"  aria-label="下一則作品">&#8250;</button>
+  </div>
+
+  <!-- 照片資料與網站功能（新增／更換照片請打開 script.js） -->
+  <script src="script.js"></script>
+</body>
+</html>

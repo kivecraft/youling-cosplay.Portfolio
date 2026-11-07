@@ -1,0 +1,530 @@
+/* 幽靈小攝影｜網站樣式（顏色、排版、動畫都在這裡） */
+
+/* ===== 基本設定 ===== */
+:root {
+  --bg: #121212;
+  --surface: #1c1c1c;
+  --text: #ededed;
+  --text-dim: #9a9a9a;
+  --accent: #c9b8ff;
+  --gap: 16px;
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans TC", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* 背景淡淡的紫色光暈，增加氛圍 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(150, 120, 255, 0.10), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 90% 10%, rgba(255, 120, 180, 0.07), transparent 70%);
+}
+
+::selection { background: rgba(201, 184, 255, 0.35); }
+
+/* ===== 導覽列（固定在上方、半透明＋模糊） ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* 圖片 Logo：預設隱藏，有設定 src 時才會顯示 */
+.logo img {
+  height: 32px;
+  width: auto;
+  display: none;
+}
+.logo img[src]:not([src=""]) { display: block; }
+
+.logo-text {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.18em;
+  background: linear-gradient(120deg, #ffffff 0%, #e3d9ff 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.logo-text small {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  color: var(--text-dim);
+  -webkit-text-fill-color: var(--text-dim);
+  margin-top: -4px;
+}
+
+.nav-links a {
+  position: relative;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  margin-left: 24px;
+  padding-bottom: 4px;
+  transition: color 0.25s;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ===== 頁首標語 ===== */
+.hero {
+  text-align: center;
+  padding: 88px 20px 56px;
+  animation: rise 1s ease both;
+}
+.hero .eyebrow {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: "Cormorant Garamond", "Noto Serif TC", serif;
+  font-weight: 500;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  margin-top: 8px;
+}
+.hero .divider {
+  width: 60px;
+  height: 1px;
+  margin: 22px auto;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+.hero p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ===== Coser 標籤（照片左上角的小標籤） ===== */
+.coser-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  max-width: calc(100% - 20px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: rgba(18, 18, 18, 0.55);
+  border: 1px solid rgba(201, 184, 255, 0.45);
+  border-radius: 999px;
+  padding: 3px 11px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: none;
+  text-decoration: none;
+}
+.coser-tag::before { content: "Coser · "; color: var(--accent); }
+
+/* 有 IG 連結時：標籤可以點，旁邊出現 IG 小圖示 */
+a.coser-tag {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+a.coser-tag:hover { background: rgba(201, 184, 255, 0.3); border-color: var(--accent); }
+.ig-icon {
+  width: 0.95em;
+  height: 0.95em;
+  vertical-align: -0.12em;
+  margin-left: 5px;
+}
+
+/* ===== 相片牆（整齊格狀排列，每張一樣大） ===== */
+.gallery {
+  /* 每張照片的長寬比：3 / 4 是直式（寬 3：高 4）
+     想要正方形改成 1 / 1，橫式改成 4 / 3 */
+  --card-ratio: 3 / 4;
+
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gap) 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 桌機：4 欄 */
+  gap: var(--gap);
+}
+
+@media (max-width: 1100px) { .gallery { grid-template-columns: repeat(3, 1fr); } }   /* 小桌機／平板橫向：3 欄 */
+@media (max-width: 768px)  { .gallery { grid-template-columns: repeat(2, 1fr); } }   /* 平板／手機：2 欄 */
+@media (max-width: 360px)  { .gallery { grid-template-columns: 1fr; } }              /* 很窄的手機：1 欄 */
+
+.photo-card {
+  aspect-ratio: var(--card-ratio);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: zoom-in;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  /* 捲動到時淡入（由 JS 加上 .show） */
+  opacity: 0;
+  transform: translateY(24px);
+}
+.photo-card.show {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease;
+}
+.photo-card:hover {
+  box-shadow: 0 0 0 1px rgba(201, 184, 255, 0.35), 0 12px 36px rgba(120, 90, 255, 0.18);
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* 照片會自動裁切填滿格子，不會變形 */
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(.2,.7,.2,1), filter 0.5s ease, opacity 0.6s ease;
+}
+.photo-card img.loaded { opacity: 1; }
+.photo-card img.broken { visibility: hidden; }   /* 照片路徑錯誤時，不顯示破圖和亂掉的文字 */
+
+.photo-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+.photo-info {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 28px 14px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.photo-card:hover .photo-info,
+.photo-card:focus-visible .photo-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+.photo-info .title { font-size: 1rem; font-weight: 500; letter-spacing: 0.06em; }
+.photo-info .by { font-size: 0.78rem; color: #cfcfcf; }
+
+/* 觸控裝置沒有 hover，直接顯示文字 */
+@media (hover: none) {
+  .photo-info { opacity: 1; transform: none; }
+}
+
+.photo-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ===== 燈箱（Lightbox） ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 76vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+  user-select: none;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  transform: scale(0.96);
+}
+.lightbox.open .lightbox-img { transform: scale(1); }
+.lightbox-img.fading { opacity: 0; }
+
+.lightbox-caption {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--text);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+.lightbox-caption .by { color: var(--text-dim); font-size: 0.82rem; }
+.lightbox-caption .lb-coser {
+  display: inline-block;
+  margin: 6px 0 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border: 1px solid rgba(201, 184, 255, 0.45);
+  border-radius: 999px;
+  padding: 2px 12px;
+  text-decoration: none;
+}
+a.lb-coser:hover { background: rgba(201, 184, 255, 0.18); border-color: var(--accent); }
+.lightbox-caption .count { color: var(--text-dim); font-size: 0.78rem; margin-top: 4px; }
+
+.lb-btn {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  cursor: pointer;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lb-btn:hover { background: rgba(201, 184, 255, 0.22); border-color: rgba(201, 184, 255, 0.5); }
+
+.lb-close { top: 20px; right: 20px; font-size: 1.8rem; }
+.lb-prev  { left: 20px;  top: 50%; transform: translateY(-50%); }
+.lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
+
+/* ----- 同一則作品裡的多張照片（IG 式輪播） ----- */
+.lb-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lb-slide {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: #121212;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, opacity 0.2s;
+}
+.lb-slide:hover { background: #fff; }
+.lb-slide-prev { left: 12px; }
+.lb-slide-next { right: 12px; }
+.lb-slide[hidden] { display: none; }
+
+.lb-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  min-height: 6px;
+}
+.lb-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.2s, transform 0.2s;
+}
+.lb-dot.active { background: var(--accent); transform: scale(1.25); }
+
+/* 相片牆上「這則有多張」的小圖示（右上角） */
+.multi-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: #fff;
+  background: rgba(18, 18, 18, 0.55);
+  border-radius: 999px;
+  padding: 3px 8px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+.multi-badge svg { width: 13px; height: 13px; }
+
+@media (max-width: 600px) {
+  .lb-btn { width: 42px; height: 42px; font-size: 1.3rem; }
+  .lb-prev { left: 8px; }
+  .lb-next { right: 8px; }
+  .lb-close { top: 12px; right: 12px; }
+}
+
+/* ===== 頁尾 ===== */
+footer {
+  text-align: center;
+  padding: 32px 20px;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ===== 關於我（自我介紹） ===== */
+.about {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+  scroll-margin-top: 80px;   /* 點導覽列「關於」時，不會被導覽列擋住 */
+}
+
+.about-card {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  padding: 40px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.about-avatar {
+  position: relative;
+  flex: 0 0 160px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px rgba(201, 184, 255, 0.4), 0 0 30px rgba(150, 120, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.about-avatar img[src]:not([src=""]) { display: block; }
+
+.about-eyebrow {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+.about-body h2 {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+  margin: 4px 0 16px;
+}
+.about-body p {
+  color: #cfcfcf;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  margin-bottom: 12px;
+}
+
+.about-links { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+.about-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  border: 1px solid rgba(201, 184, 255, 0.45);
+  border-radius: 999px;
+  padding: 6px 18px;
+  transition: background 0.25s, border-color 0.25s;
+}
+.about-link:hover { background: rgba(201, 184, 255, 0.18); border-color: var(--accent); }
+
+@media (max-width: 640px) {
+  .about-card { flex-direction: column; text-align: center; padding: 32px 22px; gap: 20px; }
+  .about-avatar { flex-basis: auto; width: 120px; height: 120px; }
+  .about-links { justify-content: center; }
+}
+
+/* ===== 作品區與關於我之間的細分隔線 ===== */
+.section-divider {
+  border: none;
+  height: 1px;
+  width: min(900px, calc(100% - 40px));
+  margin: 0 auto 56px;
+  background: linear-gradient(90deg, transparent, rgba(201, 184, 255, 0.5), transparent);
+}
+
+/* 手機 2 欄時，Coser 標籤縮小並省略「Coser ·」字樣，名字才放得下 */
+@media (max-width: 768px) {
+  .coser-tag { font-size: 0.7rem; padding: 2px 9px; top: 8px; left: 8px; }
+  .coser-tag::before { content: none; }
+}
