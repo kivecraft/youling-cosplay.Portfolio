@@ -63,8 +63,8 @@
    ===================================================================== */
 
 const cosplayPhotos = [
-  { id: 1,  url: ["images/you02.JPG", "images/a03.jpg","images/a04.jpg","images/a05.jpg"], title: "彩虹社にじさんじ", coser: "zxuytnn_", ig: "https://www.instagram.com/zxuytnn_/", photographer: "幽靈小攝影" },
-  { id: 2,  url: ["images/b01.jpg","images/b02.jpg","images/b03.jpg","images/b04.jpg","images/b05.jpg","images/b06.jpg","images/b07.jpg"], title: "彩虹社にじさんじ", coser: "gray_mond_", ig: "https://www.instagram.com/gray_mond_/", photographer: "幽靈小攝影" },
+  { id: 1,  url: ["you02.JPG", "a03.jpg","a04.jpg","a05.jpg"], title: "彩虹社にじさんじ", coser: "zxuytnn_", ig: "https://www.instagram.com/zxuytnn_/", photographer: "幽靈小攝影" },
+  { id: 2,  url: ["b01.jpg","b02.jpg","/b03.jpg","b04.jpg","b05.jpg","/b06.jpg","images/b07.jpg"], title: "彩虹社にじさんじ", coser: "gray_mond_", ig: "https://www.instagram.com/gray_mond_/", photographer: "幽靈小攝影" },
   { id: 3, url: ["images/c01.jpg","images/c03.jpg","images/c02.jpg","images/c04.jpg","images/c05.jpg"], title: "彌豆子與善意雙人照", coser: ["zxuytnn_", "xiaqiancos"], ig: ["https://www.instagram.com/zyn._.016/", "https://www.instagram.com/xiaqiancos/"], photographer: "幽靈小攝影" },
   { id: 4,  url: ["images/d01.jpg","images/d02.jpg","images/d03.jpg","images/d04.jpg","images/d05.jpg","images/d06.jpg"], title: "模特兒", Coser: "maggie.08.29", ig: "https://www.instagram.com/maggie.08.29/", photographer: "幽靈小攝影" },
   { id: 5,  url: "",    title: "範例角色 05", cpser: "範例Coser D", ig: "", photographer: "幽靈小攝影" },
