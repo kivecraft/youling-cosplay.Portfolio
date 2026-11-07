@@ -1,24 +1,10 @@
-/* =====================================================================
-   📸 照片資料區
-   ===================================================================== */
 const cosplayPhotos = [
   { id: 1,  url: ["you02.jpg", "a03.jpg","a04.jpg","a05.jpg"], title: "彩虹社にじさんじ", coser: "zxuytnn_", ig: "https://instagram.com", photographer: "幽靈小攝影" },
   { id: 2,  url: ["b01.jpg","b02.jpg","b03.jpg","b04.jpg","b05.jpg","b06.jpg","b07.jpg"], title: "彩虹社にじさんじ", coser: "gray_mond_", ig: "https://instagram.com", photographer: "幽靈小攝影" },
   { id: 3,  url: ["c01.jpg","c03.jpg","c02.jpg","c04.jpg","c05.jpg"], title: "彌豆子與善意雙人照", coser: ["zxuytnn_", "xiaqiancos"], ig: ["https://instagram.com", "https://instagram.com"], photographer: "幽靈小攝影" },
-  { id: 4,  url: ["d01.jpg","d02.jpg","d03.jpg","d04.jpg","d05.jpg","d06.jpg"], title: "模特兒", coser: "maggie.08.29", ig: "https://instagram.com", photographer: "幽靈小攝影" },
-  { id: 5,  url: "",    title: "範例角色 05", coser: "範例Coser D", ig: "", photographer: "幽靈小攝影" },
-  { id: 6,  url: "",  title: "範例角色 06", coser: "範例Coser B", ig: "@instagram", photographer: "幽靈小攝影" },
-  { id: 7,  url: "", title: "範例角色 07", coser: "範例Coser E", ig: "", photographer: "幽靈小攝影" },
-  { id: 8,  url: "", title: "範例角色 08", coser: "範例Coser C", ig: "", photographer: "幽靈小攝影" },
-  { id: 9,  url: "", title: "範例角色 09", coser: "範例Coser F", ig: "", photographer: "幽靈小攝影" },
-  { id: 10, url: "", title: "範例角色 10", coser: "範例Coser D", ig: "", photographer: "幽靈小攝影" },
-  { id: 11, url: "", title: "範例角色 11", coser: "範例Coser A", ig: "https://instagram.com", photographer: "幽靈小攝影" },
-  { id: 12, url: "", title: "範例角色 12", coser: "範例Coser E", ig: "", photographer: "幽靈小攝影" }
+  { id: 4,  url: ["d01.jpg","d02.jpg","d03.jpg","d04.jpg","d05.jpg","d06.jpg"], title: "模特兒", coser: "maggie.08.29", ig: "https://instagram.com", photographer: "幽靈小攝影" }
 ];
 
-/* =====================================================================
-   核心核心邏輯（請勿改動）
-   ===================================================================== */
 const gallery  = document.getElementById("gallery");
 const lightbox = document.getElementById("lightbox");
 const lbImg    = document.getElementById("lbImg");
@@ -62,7 +48,6 @@ function makeCoserTag(c, className) {
     tag.href = c.igUrl;
     tag.target = "_blank";
     tag.rel = "noopener noreferrer";
-    tag.title = "到 Instagram 看 " + c.name;
     if (className === "coser-tag") tag.insertAdjacentHTML("beforeend", IG_ICON);
     tag.addEventListener("click", (e) => e.stopPropagation());   
     tag.addEventListener("keydown", (e) => e.stopPropagation());
@@ -76,12 +61,12 @@ function renderGallery() {
   posts = cosplayPhotos.filter((p) => getImages(p).length > 0);
   posts.forEach((photo, index) => {
     const card = document.createElement("div");
-    card.className = "photo-card";
+    card.className = "photo-card show";
     card.tabIndex = 0;
 
     const images = getImages(photo);
     const img = document.createElement("img");
-    img.src = images[0];   
+    img.src = "./" + images[0];   
     img.alt = photo.title;
     img.loading = "lazy";
     img.addEventListener("load", () => img.classList.add("loaded"));
@@ -143,8 +128,7 @@ function updateLightbox() {
   if (currentSlide >= images.length) currentSlide = images.length - 1;
 
   if (lbImg) {
-    lbImg.src = images[currentSlide];
-    lbImg.alt = photo.title + ` (第 ${currentSlide + 1} 張)`;
+    lbImg.src = "./" + images[currentSlide];
   }
   if (lbTitle) lbTitle.textContent = photo.title;
   if (lbBy) lbBy.textContent = "📷 " + (photo.photographer || "幽靈小攝影");
