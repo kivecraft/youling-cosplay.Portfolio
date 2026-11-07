@@ -67,7 +67,7 @@ const cosplayPhotos = [
   { id: 2,  url: ["images/b01.jpg","images/b02.jpg","images/b03.jpg","images/b04.jpg","images/b05.jpg","images/b06.jpg","images/b07.jpg"], title: "彩虹社にじさんじ", coser: "gray_mond_", ig: "https://www.instagram.com/gray_mond_/", photographer: "幽靈小攝影" },
   { id: 3, url: ["images/c01.jpg","images/c03.jpg","images/c02.jpg","images/c04.jpg","images/c05.jpg"], title: "彌豆子與善意雙人照", coser: ["zxuytnn_", "xiaqiancos"], ig: ["https://www.instagram.com/zyn._.016/", "https://www.instagram.com/xiaqiancos/"], photographer: "幽靈小攝影" },
   { id: 4,  url: ["images/d01.jpg","images/d02.jpg","images/d03.jpg","images/d04.jpg","images/d05.jpg","images/d06.jpg"], title: "模特兒", Coser: "maggie.08.29", ig: "https://www.instagram.com/maggie.08.29/", photographer: "幽靈小攝影" },
-  { id: 5,  url: "",    title: "範例角色 05", coser: "範例Coser D", ig: "", photographer: "幽靈小攝影" },
+  { id: 5,  url: "",    title: "範例角色 05", cpser: "範例Coser D", ig: "", photographer: "幽靈小攝影" },
   { id: 6,  url: "",  title: "範例角色 06", coser: "範例Coser B", ig: "@instagram", photographer: "幽靈小攝影" },
   { id: 7,  url: "", title: "範例角色 07", coser: "範例Coser E", ig: "", photographer: "幽靈小攝影" },
   { id: 8,  url: "", title: "範例角色 08", coser: "範例Coser C", ig: "", photographer: "幽靈小攝影" },
